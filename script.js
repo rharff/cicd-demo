@@ -1,0 +1,1 @@
+document.getElementById("judul").textContent = "Halaman ini dikelola oleh pipeline CI/CD";
