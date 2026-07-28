@@ -18,5 +18,7 @@ jobs:
         uses: actions/setup-node@v7.0.0
         with:
           node-version: 24
-      - run: npx htmlhint index.html
-      - run: npx eslint script.js --no-eslintrc --env browser
+      - name: Run HTMLHint
+        run: npx htmlhint index.html
+      - name: Run ESLint
+        run: npx eslint@8 script.js --env browser
