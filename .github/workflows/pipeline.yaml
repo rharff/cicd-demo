@@ -65,3 +65,26 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+  deploy:
+    needs: build-and-push
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: self-hosted
+    steps:
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy container
+        run: |
+          docker stop web-app || true
+          docker rm web-app || true
+          docker pull ghcr.io/${{ github.repository }}:latest
+          docker run -d --name web-app -p 8080:80 ghcr.io/${{ github.repository }}:latest
+
+      - name: Health check
+        run: |
+          sleep 3
+          curl -f http://localhost:8080 || exit 1
