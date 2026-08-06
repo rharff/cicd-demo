@@ -2,11 +2,21 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Proyek CI/CD</title>
+  <title>ToDo App DB Test</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1 id="judul">Selamat Datang</h1>
+  <div class="container">
+    <h1>Status Koneksi DB: <span id="db-status">Mengecek...</span></h1>
+    
+    <div>
+      <input type="text" id="task-input" placeholder="Masukkan tugas...">
+      <button onclick="addTodo()">Tambah</button>
+    </div>
+
+    <ul id="todo-list"></ul>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
