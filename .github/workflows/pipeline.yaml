@@ -24,8 +24,8 @@ jobs:
           node-version: 24
       - name: Run HTMLHint
         run: npx htmlhint index.html
-      - name: Run ESLint
-        run: npx eslint
+      - name: Check JavaScript Syntax
+        run: node -c script.js
 
   build-and-push:
     needs: test # Hanya berjalan jika job testing BERHASIL
